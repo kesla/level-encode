@@ -22,4 +22,9 @@ LevelEncoding.prototype.del = function (key, callback) {
   this.db.del(key, this.opts, callback)
 }
 
+LevelEncoding.prototype.createReadStream = function (opts) {
+  opts = extend(opts || {}, this.opts)
+  return this.db.createReadStream(opts)
+}
+
 module.exports = LevelEncoding

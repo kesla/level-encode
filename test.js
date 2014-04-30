@@ -46,3 +46,17 @@ test('del', function (t) {
     })
   })
 })
+
+
+test('createReadStream', function (t) {
+  var db = level('createReadStream')
+    , enc = encode(db, 'json', 'json')
+
+  db.put(JSON.stringify(['hello', 'world']), JSON.stringify({ foo: 'bar' }), function () {
+    enc.createReadStream()
+      .once('data', function (data) {
+        t.deepEqual(data, { key: ['hello', 'world'], value: { foo: 'bar' }})
+        t.end()
+      })
+  })
+})

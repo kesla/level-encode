@@ -1,0 +1,29 @@
+{
+  "name": "level-encode",
+  "version": "1.0.0",
+  "description": "Return a levelup-instance with a certain encoding",
+  "main": "level-encode.js",
+  "dependencies": {
+    "xtend": "^3.0.0"
+  },
+  "devDependencies": {
+    "tap": "^0.4.9",
+    "level-test": "^1.6.2"
+  },
+  "scripts": {
+    "test": "tap test.js"
+  },
+  "keywords": [
+    "leveldb"
+  ],
+  "author": "David Björklund <david.bjorklund@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kesla/level-encode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kesla/level-encode/issues"
+  },
+  "homepage": "https://github.com/kesla/level-encode"
+}

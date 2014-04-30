@@ -10,15 +10,30 @@ var extend = require('xtend')
       }
     }
 
-LevelEncoding.prototype.put = function (key, value, callback) {
-  this.db.put(key, value, this.opts, callback)
+LevelEncoding.prototype.put = function (key, value, opts, callback) {
+  if (!callback) {
+    callback = opts
+    opts = {}
+  }
+  opts = extend(opts, this.opts)
+  this.db.put(key, value, opts, callback)
 }
 
-LevelEncoding.prototype.get = function (key, callback) {
+LevelEncoding.prototype.get = function (key, opts, callback) {
+  if (!callback) {
+    callback = opts
+    opts = {}
+  }
+  opts = extend(opts, this.opts)
   this.db.get(key, this.opts, callback)
 }
 
-LevelEncoding.prototype.del = function (key, callback) {
+LevelEncoding.prototype.del = function (key, opts, callback) {
+  if (!callback) {
+    callback = opts
+    opts = {}
+  }
+  opts = extend(opts, this.opts)
   this.db.del(key, this.opts, callback)
 }
 

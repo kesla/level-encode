@@ -27,4 +27,8 @@ LevelEncoding.prototype.createReadStream = function (opts) {
   return this.db.createReadStream(opts)
 }
 
+LevelEncoding.prototype.sublevel = function (name) {
+  return LevelEncoding(this.db.sublevel(name), this.opts.valueEncoding, this.opts.keyEncoding)
+}
+
 module.exports = LevelEncoding

@@ -1,5 +1,6 @@
 var test = require('tap').test
   , level = require('level-test')()
+  , subLevel = require('level-sublevel')
   , encode = require('./level-encode')
 
 test('put', function (t) {
@@ -7,10 +8,6 @@ test('put', function (t) {
     , enc = encode(db, 'json', 'json')
 
   enc.put(['hello', 'world'], { foo: 'bar' }, function () {
-    db.createReadStream().once('data', function () {
-      console.log(arguments )
-    })
-
     db.get(JSON.stringify(['hello', 'world']), function (err, data) {
       t.deepEqual(JSON.parse(data), { foo: 'bar' })
       t.end()
@@ -58,5 +55,17 @@ test('createReadStream', function (t) {
         t.deepEqual(data, { key: ['hello', 'world'], value: { foo: 'bar' }})
         t.end()
       })
+  })
+})
+
+test('sublevel', function (t) {
+  var db = subLevel(level('sublevel'))
+    , enc = encode(db, 'json') // keyEncoding don't seem to work
+
+  db.sublevel('beep').put('boop', JSON.stringify({ foo: 'bar' }), function () {
+    enc.sublevel('beep').get('boop', function (err, data) {
+      t.deepEqual(data, { foo: 'bar' })
+      t.end()
+    })
   })
 })

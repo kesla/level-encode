@@ -2,6 +2,10 @@
 
 Return a levelup-instance with a certain encoding
 
+[![NPM](https://nodei.co/npm/level-encode.png?downloads&stars)](https://nodei.co/npm/level-encode/)
+
+[![NPM](https://nodei.co/npm-dl/level-encode.png)](https://nodei.co/npm/level-encode/)
+
 ## Installation
 
 ```

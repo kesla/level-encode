@@ -42,6 +42,16 @@ LevelEncoding.prototype.createReadStream = function (opts) {
   return this.db.createReadStream(opts)
 }
 
+LevelEncoding.prototype.createValueStream = function (opts) {
+  opts = extend(opts || {}, this.opts)
+  return this.db.createValueStream(opts)
+}
+
+LevelEncoding.prototype.createKeyStream = function (opts) {
+  opts = extend(opts || {}, this.opts)
+  return this.db.createKeyStream(opts)
+}
+
 LevelEncoding.prototype.sublevel = function (name) {
   return LevelEncoding(this.db.sublevel(name), this.opts.valueEncoding, this.opts.keyEncoding)
 }

@@ -44,7 +44,6 @@ test('del', function (t) {
   })
 })
 
-
 test('createReadStream', function (t) {
   var db = level('createReadStream')
     , enc = encode(db, 'json', 'json')
@@ -53,6 +52,32 @@ test('createReadStream', function (t) {
     enc.createReadStream()
       .once('data', function (data) {
         t.deepEqual(data, { key: ['hello', 'world'], value: { foo: 'bar' }})
+        t.end()
+      })
+  })
+})
+
+test('createValueStream', function (t) {
+  var db = level('createValueStream')
+    , enc = encode(db, 'json', 'json')
+
+  db.put(JSON.stringify(['hello', 'world']), JSON.stringify({ foo: 'bar' }), function () {
+    enc.createValueStream()
+      .once('data', function (data) {
+        t.deepEqual(data, { foo: 'bar' })
+        t.end()
+      })
+  })
+})
+
+test('createKeyStream', function (t) {
+  var db = level('createKeyStream')
+    , enc = encode(db, 'json', 'json')
+
+  db.put(JSON.stringify(['hello', 'world']), JSON.stringify({ foo: 'bar' }), function () {
+    enc.createKeyStream()
+      .once('data', function (data) {
+        t.deepEqual(data, ['hello', 'world'])
         t.end()
       })
   })
